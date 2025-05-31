@@ -60,7 +60,7 @@ async def handle_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     cmd = query.data.replace("send_", "")
     if cmd in PDF_MAPPING:
         subject, filename = PDF_MAPPING[cmd]
-        file_path = os.path.join(BASE_DIR, subject, filename)
+        file_path = os.path.join(BASE_DIR, filename)
 
         if os.path.exists(file_path):
             await query.message.reply_document(
