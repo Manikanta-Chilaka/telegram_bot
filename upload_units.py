@@ -3,7 +3,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Cont
 import os
 TOKEN = os.getenv("BOT_TOKEN")
 
-BASE_DIR = r"C:\Users\chila\Downloads\Telegram bot\notes\Computer Networks Notes"
+BASE_DIR = "notes"
 
 # PDF Structure (modify as needed)
 PDF_MAPPING = {
