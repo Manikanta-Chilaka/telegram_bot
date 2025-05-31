@@ -13,17 +13,17 @@ logger = logging.getLogger(__name__)
 TOKEN = os.getenv("BOT_TOKEN")
 BASE_DIR = "notes"
 
-# PDF Structure
+# Updated PDF mapping (directly in notes folder)
 PDF_MAPPING = {
-    "cnunit1": ("Computer Networks", "Unit-1.pdf"),
-    "cnunit2": ("Computer Networks", "CN Unit-2.pdf"),
-    "cnunit3_part1": ("Computer Networks", "CN Unit-3 Part1.pdf"),
-    "cnunit3_part2": ("Computer Networks", "CN Unit-3 Part-2.pdf"),
-    "cnunit4": ("Computer Networks", "CN Unit-4.pdf"),
-    "cnunit5": ("Computer Networks", "CN Unit-5.pdf"),
-    "cnunit6": ("Computer Networks", "CN Unit-6.pdf"),
-    "cntextbook": ("Computer Networks", "CN textbook.pdf"),
-    "cnonlinenotes": ("Computer Networks", "CN Online notes.pdf")
+    "cnunit1": "Unit-1.pdf",
+    "cnunit2": "CN Unit-2.pdf",
+    "cnunit3_part1": "CN Unit-3 Part1.pdf",
+    "cnunit3_part2": "CN Unit-3 Part-2.pdf",
+    "cnunit4": "CN Unit-4.pdf",
+    "cnunit5": "CN Unit-5.pdf",
+    "cnunit6": "CN Unit-6.pdf",
+    "cntextbook": "CN textbook.pdf",
+    "cnonlinenotes": "CN Online notes.pdf"
 }
 
 async def menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -42,7 +42,7 @@ async def handle_subject(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
 
     buttons = []
-    for cmd, (subject, filename) in PDF_MAPPING.items():
+    for cmd, filename in PDF_MAPPING.items():
         btn_text = cmd.replace("cn", "").replace("_", " ").title()
         buttons.append([InlineKeyboardButton(btn_text, callback_data=f"send_{cmd}")])
 
@@ -60,8 +60,8 @@ async def handle_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     cmd = query.data.replace("send_", "")
     if cmd in PDF_MAPPING:
-        subject, filename = PDF_MAPPING[cmd]
-        file_path = os.path.join(BASE_DIR, subject, filename)
+        filename = PDF_MAPPING[cmd]
+        file_path = os.path.join(BASE_DIR, filename)
 
         try:
             with open(file_path, 'rb') as file:
@@ -110,7 +110,7 @@ def main():
         threading.Thread(target=lambda: flask_app.run(
             host='0.0.0.0',
             port=int(os.environ.get('PORT', 10000))
-        )).start()
+        ).start()
 
     logger.info("Bot starting...")
     app.run_polling()
