@@ -1,8 +1,8 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 import os
+TOKEN = os.getenv("BOT_TOKEN")
 
-TOKEN = ""
 BASE_DIR = r"C:\Users\chila\Downloads\Telegram bot\notes\Computer Networks Notes"
 
 # PDF Structure (modify as needed)
