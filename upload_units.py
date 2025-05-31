@@ -2,7 +2,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 import os
 
-TOKEN = "8058560570:AAFo5wxCnRubN6yuXuG0PMrXQ0ccjsjD8us"
+TOKEN = ""
 BASE_DIR = r"C:\Users\chila\Downloads\Telegram bot\notes\Computer Networks Notes"
 
 # PDF Structure (modify as needed)
