@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 TOKEN = os.getenv("BOT_TOKEN")
 BASE_DIR = "notes"
 
-# Updated PDF mapping (directly in notes folder)
+# PDF Structure (all files directly in notes folder)
 PDF_MAPPING = {
     "cnunit1": "Unit-1.pdf",
     "cnunit2": "CN Unit-2.pdf",
@@ -96,7 +96,7 @@ def main():
     app.add_handler(CallbackQueryHandler(handle_pdf, pattern="^send_"))
     app.add_handler(CallbackQueryHandler(back_to_menu, pattern="^back_to_menu$"))
 
-    # For Render.com compatibility
+    # For Render.com compatibility - FIXED PARENTHESES HERE
     if os.getenv('RENDER'):
         from flask import Flask
         import threading
@@ -107,10 +107,13 @@ def main():
         def home():
             return "Telegram bot is running"
         
-        threading.Thread(target=lambda: flask_app.run(
-            host='0.0.0.0',
-            port=int(os.environ.get('PORT', 10000))
-        ).start()
+        # Fixed the parentheses closure here
+        flask_thread = threading.Thread(
+            target=lambda: flask_app.run(
+                host='0.0.0.0',
+                port=int(os.environ.get('PORT', 10000))
+        )
+        flask_thread.start()
 
     logger.info("Bot starting...")
     app.run_polling()
