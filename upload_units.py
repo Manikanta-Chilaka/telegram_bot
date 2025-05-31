@@ -107,11 +107,12 @@ def main():
         def home():
             return "Telegram bot is running"
         
-        # Fixed the parentheses closure here
+        
         flask_thread = threading.Thread(
             target=lambda: flask_app.run(
                 host='0.0.0.0',
                 port=int(os.environ.get('PORT', 10000))
+        )
         )
         flask_thread.start()
 
